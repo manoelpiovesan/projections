@@ -18,16 +18,20 @@ public class CategoryProjection {
     public Long productCount;
     @ProjectedFieldName("COALESCE(SUM(p.stock), 0)")
     public Long absoluteProductCount;
+    @ProjectedFieldName("COALESCE(AVG(p.price), 0)")
+    public double averagePrice;
 
     public CategoryProjection(Long id, String name, String description,
                               String image, Long productCount,
-                              Long absoluteProductCount) {
+                              Long absoluteProductCount, double averagePrice) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.image = image;
         this.productCount = productCount;
         this.absoluteProductCount = absoluteProductCount;
+        this.averagePrice = averagePrice;
+
     }
 
 }
