@@ -12,6 +12,10 @@ VALUES ('Category 2', 'Category 2 Description', 'category2.jpg', now(), now(), '
 INSERT INTO category (category_name, category_description, category_image, created_at, updated_at, deleted_at)
 VALUES ('Category 3', 'Category 3 Description', 'category3.jpg', now(), now(), '1970-01-01 00:00:00+00');
 
+-- 4
+INSERT INTO category (category_name, category_description, category_image, created_at, updated_at, deleted_at)
+VALUES ('Category 4', 'Category 4 Description', 'category4.jpg', now(), now(), '1970-01-01 00:00:00+00');
+
 -- Product
 
 -- 1 - Category 1

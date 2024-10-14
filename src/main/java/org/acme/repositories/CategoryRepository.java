@@ -16,7 +16,7 @@ public class CategoryRepository extends AbstractRepository<Category> {
             return findAll();
         } else {
             return find("""
-                        FROM Category c JOIN Product p ON c.id = p.category.id
+                        FROM Category c LEFT JOIN Product p ON c.id = p.category.id
                         WHERE c.name
                         LIKE ?1
                         OR c.description LIKE ?1
