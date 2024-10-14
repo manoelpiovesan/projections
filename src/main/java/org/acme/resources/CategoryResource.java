@@ -22,7 +22,7 @@ public class CategoryResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<CategoryProjection> listProjected(
             @QueryParam("term") String term) {
-        return repository.listProjection(term);
+        return repository.listProjected(term);
     }
 
     @GET
@@ -46,7 +46,6 @@ public class CategoryResource {
     @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/add")
     public Category add(Category category) {
         category.createdAt = new Date();
         category.updatedAt = new Date();

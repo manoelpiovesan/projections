@@ -16,14 +16,18 @@ public class CategoryProjection {
     public String image;
     @ProjectedFieldName("COALESCE(COUNT(p.id), 0)")
     public Long productCount;
+    @ProjectedFieldName("COALESCE(SUM(p.stock), 0)")
+    public Long absoluteProductCount;
 
     public CategoryProjection(Long id, String name, String description,
-                              String image, Long productCount) {
+                              String image, Long productCount,
+                              Long absoluteProductCount) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.image = image;
         this.productCount = productCount;
+        this.absoluteProductCount = absoluteProductCount;
     }
 
 }

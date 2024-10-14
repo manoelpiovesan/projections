@@ -1,7 +1,6 @@
 package org.acme.repositories;
 
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
-import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.entities.Category;
 import org.acme.projections.CategoryProjection;
@@ -11,6 +10,7 @@ import java.util.List;
 @ApplicationScoped
 public class CategoryRepository extends AbstractRepository<Category> {
 
+    @Override
     public PanacheQuery<Category> search(String term) {
         if (term == null) {
             return findAll();
@@ -26,7 +26,7 @@ public class CategoryRepository extends AbstractRepository<Category> {
         }
     }
 
-    public List<CategoryProjection> listProjection(String term) {
+    public List<CategoryProjection> listProjected(String term) {
         return search(term).project(CategoryProjection.class).list();
     }
 
