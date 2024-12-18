@@ -8,6 +8,7 @@ import jakarta.ws.rs.core.Response;
 import org.acme.entities.Category;
 import org.acme.projections.CategoryProjection;
 import org.acme.repositories.CategoryRepository;
+import org.acme.repositories.ProductRepository;
 
 import java.util.Date;
 import java.util.List;
@@ -17,6 +18,9 @@ public class CategoryResource {
 
     @Inject
     CategoryRepository repository;
+
+    @Inject
+    ProductRepository productRepository;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -60,6 +64,32 @@ public class CategoryResource {
 
         repository.persist(category);
         return category;
+    }
+
+    @GET
+    @Path("/{id}/products")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listProductsByCategoryId(
+            @PathParam("id") Long id,
+            @QueryParam("page") @DefaultValue("0") int page,
+            @QueryParam("size") @DefaultValue("15") int size
+    ) {
+        if (page < 0 || size < 0) {
+            return Response.status(Response.Status.BAD_REQUEST.getStatusCode(),
+                                   "Page and size must be " +
+                                   "greater than or equal to 0.")
+                           .build();
+        }
+
+        if (id == null) {
+            return Response.status(Response.Status.BAD_REQUEST.getStatusCode(),
+                                   "Category id must be provided.")
+                           .build();
+        }
+
+        return Response.ok(
+                               productRepository.getByCategoryId(id, null, page, size))
+                       .build();
     }
 
 }
